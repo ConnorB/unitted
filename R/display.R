@@ -94,15 +94,15 @@ setMethod(
 )
 
 #' Print a unitted_tbl_df
-#' 
+#'
 #' @rdname print.unitted
 #' @param n As in tibble's \code{\link[tibble]{formatting}}, Number of rows to
-#'   show. If `NULL`, the default, will print all rows if less than option 
+#'   show. If `NULL`, the default, will print all rows if less than option
 #'   `tibble.print_max`. Otherwise, will print `tibble.print_min` rows.
 #' @param width As in tibble's \code{\link[tibble]{formatting}}, Width of text
-#'   output to generate. This defaults to NULL, which means use 
-#'   `getOption("tibble.width")` or (if also NULL) `getOption("width")`; the 
-#'   latter displays only the columns that fit on one screen. You can also set 
+#'   output to generate. This defaults to NULL, which means use
+#'   `getOption("tibble.width")` or (if also NULL) `getOption("width")`; the
+#'   latter displays only the columns that fit on one screen. You can also set
 #'   `options(tibble.width = Inf)` to override this default and always print all
 #'   columns.
 #' @param n_extra As in tibble's \code{\link[tibble]{formatting}}, Number of
@@ -114,25 +114,16 @@ setMethod(
 setMethod(
   ".unitted_print", "tbl_df",
   function(x, ..., n = NULL, width = NULL, n_extra = NULL) {
-    # shrink table as tibble does
-    y <- tibble::trunc_mat(v(x), n = n, width = width, n_extra = n_extra)
-    
-    # insert row for units
-    y$table <- y$table[c(1,1:nrow(y$table)),]
-    rownames(y$table)[1:2] <- c("U","")
-    y$table[1,] <- get_units(x)
-    
-    # reshrink table in case units are wider than other column contents
-    yu <- tibble::trunc_mat(y$table, n = n, width = width, n_extra = n_extra)
-    y$table <- y$table[names(yu$table)]
-    y[c('extra','width','n_extra')] <- yu[c('extra','width','n_extra')]
-    
-    # revise the summary vector element name (it's originally 'A tibble')
-    names(y$summary) <- 'A unitted tibble'
-    
-    # print
-    print(y, n=n, width=width, n_extra=n_extra)
-    
+    # Print header
+    cat(paste0("# A unitted tibble: ", nrow(x), " x ", ncol(x), "\n"))
+
+    # Print units row
+    units_str <- get_units(x)
+    cat("# Units: ", paste(units_str, collapse = ", "), "\n")
+
+    # Print the underlying tibble
+    print(v(x), n = n, width = width, n_extra = n_extra)
+
     invisible(x)
   }
 )

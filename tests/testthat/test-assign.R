@@ -126,7 +126,7 @@ test_that("[<-.unitted works for data.frames", {
   expect_that({udf <- udf0; udf[c(T,F,F),] <- udf[3,]; udf}, equals({df <- df0; df[c(T,F,F),] <- df[3,]; u(df,units)}), info="logical index to replace whole row")
   knownbug(expect_that({udf <- udf0; udf[,c(F,T,F)] <- udf[,1]; udf}, gives_warning("this shouldn't give a warning"), info="logical index to replace whole column - shouldn't give warning"))
   expect_that({udf <- udf0; udf[,c(F,T,F)] <- list(udf[,1]); udf}, equals({df <- df0; df[,c(F,T,F)] <- df[,1]; u(df,units[c(1,1,3)])}), info="logical index to replace whole column")
-  expect_that({df <- df0; df[,F] <- df[,1]; df}, gives_warning("data length exceeds size of matrix"))
+  expect_that({df <- df0; df[,F] <- df[,1]; df}, gives_warning("(data length exceeds size of matrix|non-empty data for zero-extent matrix)"))
   knownbug(expect_that({udf <- udf0; udf[,F] <- udf[,1]; udf}, gives_warning("data length exceeds size of matrix")))
   expect_that({udf <- udf0; udf[F,] <- udf[1,]; udf}, equals({df <- df0; df[F,] <- df[1,]; u(df,units)}), info="replacement of rows=F should give no warning, weirdly")
   
@@ -213,7 +213,7 @@ test_that("[[<-.unitted works for vectors", {
   # improper [[<- usage
   expect_that({uvec <- uvec0; uvec[[c(2,3)]] <- 99; uvec}, throws_error("attempt to select more than one element"))
   expect_that({uvec <- uvec0; uvec[[2,3]] <- 99; uvec}, throws_error("improper number of subscripts"))
-  expect_that({uvec <- uvec0; uvec[[]] <- 99; uvec}, throws_error("with missing subscript")) # but maybe [[<-.unitted should permit replacement of all values without changing units?
+  expect_that({uvec <- uvec0; uvec[[]] <- 99; uvec}, throws_error("missing subscript")) # but maybe [[<-.unitted should permit replacement of all values without changing units?
 })
 
 test_that("[[<-.unitted works for data.frames", {
@@ -233,8 +233,8 @@ test_that("[[<-.unitted works for data.frames", {
   knownbug(expect_that({udf <- udf0; udf[[c(T,F)]] <- 5; udf}, throws_error("more elements supplied than there are to replace")))
   knownbug(expect_that({udf <- udf0; udf[[T]] <- 5; udf}, equals({udf <- udf0; udf[[1]] <- 5; udf})))
   knownbug(expect_that({udf <- udf0; udf[[F]] <- 5; udf}, throws_error("attempt to select less than one element")))
-  expect_that({df <- df0; df[[]] <- 5; df}, throws_error("with missing subscript"))
-  knownbug(expect_that({udf <- udf0; udf[[]] <- 5; udf}, throws_error("with missing subscript")))
+  expect_that({df <- df0; df[[]] <- 5; df}, throws_error("missing subscript"))
+  knownbug(expect_that({udf <- udf0; udf[[]] <- 5; udf}, throws_error("missing subscript")))
   
   # two numeric or character indices (logical breaks correctly)
   knownbug({
@@ -255,12 +255,12 @@ test_that("[[<-.unitted works for data.frames", {
   # deletion by udf[xx] <- NULL
   knownbug({
     expect_that({udf <- udf0; udf[[2]] <- NULL; udf}, equals({df <- df0; df[[2]] <- NULL; u(df,units[c(1,3)])}), info="a column may be deleted with [[x]] <- NULL")
-    expect_that({udf <- udf0; udf[[c(1,2)]] <- NULL; udf}, throws_error("more elements supplied than there are to replace"), info="only one column at a time")
-    expect_that({udf <- udf0; udf[[2,2]] <- NULL; udf}, throws_error("more elements supplied than there are to replace"), info="NULL cannot replace an element")
+    expect_that({udf <- udf0; udf[[c(1,2)]] <- NULL; udf}, throws_error("(more elements supplied than there are to replace|replacement has length zero)"), info="only one column at a time")
+    expect_that({udf <- udf0; udf[[2,2]] <- NULL; udf}, throws_error("(more elements supplied than there are to replace|replacement has length zero)"), info="NULL cannot replace an element")
     expect_that({udf <- udf0; udf[[,2]] <- NULL; udf}, throws_error("only valid calls are "), info="cols may NOT be deleted with df[[x,]] <- NULL")
     expect_that({udf <- udf0; udf[[2,]] <- NULL; udf}, throws_error("only valid calls are "), info="rows may NOT be deleted with df[[x,]] <- NULL")
   })
-  expect_that({df <- df0; df[[2,2]] <- NULL; df}, throws_error("more elements supplied than there are to replace"), info="NULL cannot replace an element")
+  expect_that({df <- df0; df[[2,2]] <- NULL; df}, throws_error("(more elements supplied than there are to replace|replacement has length zero)"), info="NULL cannot replace an element")
   
   # adding columns
   knownbug({

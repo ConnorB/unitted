@@ -4,8 +4,12 @@
 \alias{merge_units}
 \title{Turn a units data.frame into the character representation of the units}
 \usage{
-merge_units(unitdfs, delimiter = "|", rule = c("disambiguate", "never",
-  "always"), separator = " ")
+merge_units(
+  unitdfs,
+  delimiter = "|",
+  rule = c("disambiguate", "never", "always"),
+  separator = " "
+)
 }
 \arguments{
 \item{unitdfs}{list of unit data.frames, such as those returned by a call to 
@@ -30,5 +34,7 @@ list of character strings, one for each data.frame passed in
 Turn a units data.frame into the character representation of the units
 }
 \seealso{
-Other unit-merging functions: \code{\link{delimit_units}}
+Other unit-merging functions: 
+\code{\link{delimit_units}()}
 }
+\concept{unit-merging functions}

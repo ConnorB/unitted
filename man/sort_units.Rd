@@ -19,7 +19,9 @@ Sort the units data.frame by numerator/denominator and then alphabetically by
 the unit name
 }
 \seealso{
-Other unit-parsing functions: \code{\link{parse_units}},
-  \code{\link{prepare_delimiter}},
-  \code{\link{simplify_units}}
+Other unit-parsing functions: 
+\code{\link{parse_units}()},
+\code{\link{prepare_delimiter}()},
+\code{\link{simplify_units}()}
 }
+\concept{unit-parsing functions}

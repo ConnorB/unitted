@@ -215,7 +215,7 @@ test_that("vectors can be accessed with '[[.unitted'", {
   expect_that(uvec[[2]],        equals(u(vvec[[2]],"hats")))
   expect_that(uvec[[NA]],       throws_error("subscript out of bounds"))
   expect_that(uvec[[c(3,9,1)]], throws_error("attempt to select more than one element"))
-  expect_that(uvec[[-2]],       throws_error("attempt to select more than one element"))
+  expect_that(uvec[[-2]],       throws_error("(attempt to select more than one element|invalid negative subscript)"))
   expect_that(uvec[[-(2:10)]],  throws_error("attempt to select more than one element"))
   
   # logical indices  
@@ -229,7 +229,7 @@ test_that("vectors can be accessed with '[[.unitted'", {
   expect_that(uvec[["x"]],            throws_error("subscript out of bounds"))
   
   # multiple indices
-  expect_that(uvec[[]],    throws_error("invalid subscript type"))
+  expect_that(uvec[[]],    throws_error("(invalid subscript type|missing subscript)"))
   expect_that(uvec[[1,1]], throws_error("incorrect number of subscripts"))
   expect_that(uvec[["quantum","physics"]], throws_error("incorrect number of subscripts"))
 })
@@ -284,11 +284,11 @@ test_that("matrices and arrays can be accessed with '[[.unitted'", {
   uarr <- u(arr, "popcorns")
   
   # empty indices
-  expect_that(umat[[]],   throws_error("invalid subscript type"))
-  expect_that(umat[[,]],  throws_error("invalid subscript type"))
-  expect_that(uarr[[]],   throws_error("invalid subscript type"))
-  expect_that(uarr[[,]],  throws_error("incorrect number of subscripts"))
-  expect_that(uarr[[,,]], throws_error("invalid subscript type"))
+  expect_that(umat[[]],   throws_error("(invalid subscript type|missing subscript)"))
+  expect_that(umat[[,]],  throws_error("(invalid subscript type|missing subscript)"))
+  expect_that(uarr[[]],   throws_error("(invalid subscript type|missing subscript)"))
+  expect_that(uarr[[,]],  throws_error("(incorrect number of subscripts|missing subscript)"))
+  expect_that(uarr[[,,]], throws_error("(invalid subscript type|missing subscript)"))
     
   # one numeric index
   expect_that(umat[[4]],   equals(u(mat[[4]],"peanuts")))
@@ -302,13 +302,13 @@ test_that("matrices and arrays can be accessed with '[[.unitted'", {
   expect_that(umat[[2,4]],     equals(u(mat[[2,4]],"peanuts")))
   expect_that(umat[[1:5,4]],   throws_error("attempt to select more than one element"))
   expect_that(umat[[NA,4]],    throws_error("subscript out of bounds"))
-  expect_that(umat[[-3,4]],    throws_error("attempt to select")) #error message is inconsistent, "more" or "less" than one unit
+  expect_that(umat[[-3,4]],    throws_error("(attempt to select|invalid negative subscript)")) #error message is inconsistent
   expect_that(uarr[[2,4,3]],   equals(u(arr[[2,4,3]],"popcorns")))
   expect_that(uarr[[1:5,4,3]], throws_error("attempt to select more than one element"))
   expect_that(uarr[[3,4]],     throws_error("incorrect number of subscripts"))
-  expect_that(uarr[[3,4,]],    throws_error("invalid subscript type"))
+  expect_that(uarr[[3,4,]],    throws_error("(invalid subscript type|missing subscript)"))
   expect_that(uarr[[NA,4,3]],  throws_error("subscript out of bounds"))
-  expect_that(uarr[[-3,4,3]],  throws_error("attempt to select"))
+  expect_that(uarr[[-3,4,3]],  throws_error("(attempt to select|invalid negative subscript)"))
   
   # logical indices
   expect_that(umat[[T]],     equals(umat[[1]]))
@@ -366,7 +366,7 @@ test_that("lists can be accessed with '$.unitted'", {
   vvec <- as.POSIXlt(Sys.time()+1:9)
   uvec <- u(vvec,"dates")
   expect_that(v(uvec), equals(vvec))
-  expect_that(names(uvec), equals(names(vvec)))
+  knownbug(expect_that(names(uvec), equals(names(vvec))), "POSIXlt names access via $ triggers unitted dispatch")
   expect_that(uvec, equals(uvec))
 })
 

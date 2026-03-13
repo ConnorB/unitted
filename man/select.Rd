@@ -39,10 +39,10 @@ Implements dplyr::rename and dplyr::rename_ for unitted_tbl_dfs
 }
 \examples{
 dplyr::select(
- u(data.frame(x=1:3, y=3:5, z=c("aa", "bb", "cc")), c("X","Y","Z")), 
+ u(data.frame(x=1:3, y=3:5, z=c("aa", "bb", "cc")), c("X","Y","Z")),
  a=y, x)
 dplyr::select(
- tibble::as_tibble(u(data.frame(x=1:3, y=3:5, z=c("aa", "bb", "cc")), c("X","Y","Z"))), 
+ tibble::as_tibble(u(data.frame(x=1:3, y=3:5, z=c("aa", "bb", "cc")), c("X","Y","Z"))),
  a=y, x)
 df <- u(data.frame(x=1:3, y=3:5, z=c("aa", "bb", "cc")), c("X","Y","Z"))
 dplyr::rename(df, a=y, beta=x)

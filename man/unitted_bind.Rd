@@ -11,12 +11,14 @@
 \alias{cbind}
 \title{Bind unitted objects by row or column}
 \usage{
-\method{rbind}{unitted}(...)
+\method{rbind}{unitted}(..., deparse.level = 1)
 
-\method{cbind}{unitted}(...)
+\method{cbind}{unitted}(..., deparse.level = 1)
 }
 \arguments{
 \item{...}{unitted vectors, matrices, or data.frames}
+
+\item{deparse.level}{integer controlling labels (0, 1, or 2)}
 }
 \description{
 Combines unitted objects as if they were not unitted, but enforces unit
@@ -28,6 +30,9 @@ consistency across the objects to be combined.
   available for unitted rbind/cbind calls.
 }
 \seealso{
-Other unitted object manipulation: \code{\link{unitted_c}},
-  \code{\link{unitted_merge}}, \code{\link{unitted_rep}}
+Other unitted object manipulation: 
+\code{\link{unitted_c}},
+\code{\link{unitted_merge}},
+\code{\link{unitted_rep}}
 }
+\concept{unitted object manipulation}

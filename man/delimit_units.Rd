@@ -23,5 +23,7 @@ A helper to merge_units that wraps the unit in the delimiter, or not,
 according to \code{rule}.
 }
 \seealso{
-Other unit-merging functions: \code{\link{merge_units}}
+Other unit-merging functions: 
+\code{\link{merge_units}()}
 }
+\concept{unit-merging functions}

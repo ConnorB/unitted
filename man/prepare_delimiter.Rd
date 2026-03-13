@@ -16,6 +16,9 @@ The wrapped delimiter.
 Helper to parse_units
 }
 \seealso{
-Other unit-parsing functions: \code{\link{parse_units}},
-  \code{\link{simplify_units}}, \code{\link{sort_units}}
+Other unit-parsing functions: 
+\code{\link{parse_units}()},
+\code{\link{simplify_units}()},
+\code{\link{sort_units}()}
 }
+\concept{unit-parsing functions}

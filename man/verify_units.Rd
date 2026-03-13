@@ -4,8 +4,13 @@
 \alias{verify_units}
 \title{Assert that a unitted object has the expected units}
 \usage{
-verify_units(x, expected.units, return.values = list(x, NULL),
-  violation.handler = stop, nounits.handler = warning)
+verify_units(
+  x,
+  expected.units,
+  return.values = list(x, NULL),
+  violation.handler = stop,
+  nounits.handler = warning
+)
 }
 \arguments{
 \item{x}{character. The object to test for whether it has the expected units.}

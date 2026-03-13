@@ -19,6 +19,9 @@
 Wrapper for non-unitted rep() methods.
 }
 \seealso{
-Other unitted object manipulation: \code{\link{unitted_bind}},
-  \code{\link{unitted_c}}, \code{\link{unitted_merge}}
+Other unitted object manipulation: 
+\code{\link{unitted_bind}},
+\code{\link{unitted_c}},
+\code{\link{unitted_merge}}
 }
+\concept{unitted object manipulation}

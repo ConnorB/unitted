@@ -5,8 +5,15 @@
 \title{Read a unitted data.frame from a text file that was written using 
 write_unitted.}
 \usage{
-read_unitted(file, comment.char = "#", header = TRUE, sep = "\\t",
-  stringsAsFactors = FALSE, ..., attach.units = TRUE)
+read_unitted(
+  file,
+  comment.char = "#",
+  header = TRUE,
+  sep = "\\t",
+  stringsAsFactors = FALSE,
+  ...,
+  attach.units = TRUE
+)
 }
 \arguments{
 \item{file}{The file to read in}

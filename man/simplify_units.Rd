@@ -16,6 +16,9 @@ list of simplified unit data.frames
 Combine redundant units and eliminate units raised to the 0th power
 }
 \seealso{
-Other unit-parsing functions: \code{\link{parse_units}},
-  \code{\link{prepare_delimiter}}, \code{\link{sort_units}}
+Other unit-parsing functions: 
+\code{\link{parse_units}()},
+\code{\link{prepare_delimiter}()},
+\code{\link{sort_units}()}
 }
+\concept{unit-parsing functions}

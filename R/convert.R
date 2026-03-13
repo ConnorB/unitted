@@ -43,6 +43,7 @@ unittedreplace <- function(unitteddf, colname, replacefun, replacevalues) {
 
 # as.Date defaults don't work well for unitted dates; the S4 container becomes
 # Date but the internal representation stays as it was. So let's rewrite that.
+#' @exportS3Method
 as.Date.unitted <- function(x, ...) {
   as.Date(deunitted(x), ...)
 }

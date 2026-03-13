@@ -284,18 +284,19 @@ c.unitted <- function(..., recursive=FALSE) {
 #' @rdname unitted_bind
 #' @export
 #' @family unitted object manipulation
-#' 
+#'
 #' @param ... unitted vectors, matrices, or data.frames
-rbind.unitted <- function(...) {
+#' @param deparse.level integer controlling labels (0, 1, or 2)
+rbind.unitted <- function(..., deparse.level = 1) {
   .unitted_bind(..., fun.name="rbind")
 }
 
-# The specific unitted_xxx functions get discovered by rbind(), while the 
-# generic rbind.unitted never does. So we need an rbind function for every 
+# The specific unitted_xxx functions get discovered by rbind(), while the
+# generic rbind.unitted never does. So we need an rbind function for every
 # unitted subclass. The rbind.unitted function defined above is also useful,
 # however, for when someone wants to explicitly specify a unitted type of rbind.
 for(subclass in names(getClass("unitted")@subclasses)) {
-  assign(paste0("rbind.",subclass), function(...) {
+  assign(paste0("rbind.",subclass), function(..., deparse.level = 1) {
     .unitted_bind(..., fun.name="rbind")
   })
 }
@@ -305,13 +306,13 @@ for(subclass in names(getClass("unitted")@subclasses)) {
 #' @aliases unitted_cbind cbind
 #' @rdname unitted_bind
 #' @export
-cbind.unitted <- function(...) {
+cbind.unitted <- function(..., deparse.level = 1) {
   .unitted_bind(..., fun.name="cbind")
 }
 
 # Same logic as for rbind methods.
 for(subclass in names(getClass("unitted")@subclasses)) {
-  assign(paste0("cbind.",subclass), function(...) {
+  assign(paste0("cbind.",subclass), function(..., deparse.level = 1) {
     .unitted_bind(..., fun.name="cbind")
   })
 }

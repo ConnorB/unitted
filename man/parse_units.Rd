@@ -38,6 +38,9 @@ of unit strings: c("kgC ha^-1 yr^-1", "PgN", "ft^3 s^-1"). }
 strings will be turned into N internal representations. }
 }
 \seealso{
-Other unit-parsing functions: \code{\link{prepare_delimiter}},
-  \code{\link{simplify_units}}, \code{\link{sort_units}}
+Other unit-parsing functions: 
+\code{\link{prepare_delimiter}()},
+\code{\link{simplify_units}()},
+\code{\link{sort_units}()}
 }
+\concept{unit-parsing functions}

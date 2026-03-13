@@ -6,14 +6,16 @@
 \alias{as_tibble.unitted_tbl_df}
 \title{Convert a unitted_list to a unitted_tibble}
 \usage{
-\method{as_tibble}{unitted_list}(x)
+\method{as_tibble}{unitted_list}(x, ...)
 
-\method{as_tibble}{unitted_data.frame}(x)
+\method{as_tibble}{unitted_data.frame}(x, ...)
 
-\method{as_tibble}{unitted_tbl_df}(x)
+\method{as_tibble}{unitted_tbl_df}(x, ...)
 }
 \arguments{
 \item{x}{the unitted object to convert to a unitted_tbl_df}
+
+\item{...}{additional arguments (ignored)}
 }
 \description{
 Implements \code{\link[tibble]{as_tibble}} for unitted_lists
